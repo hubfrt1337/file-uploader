@@ -5,7 +5,7 @@ const {prisma} = require("../lib/prisma.js");
 const bcrypt = require("bcryptjs");
 
 
-router.get("", async (req, res) => {
+router.get("/", async (req, res) => {
     res.render("index", {user: req.user})
 })
 
@@ -13,6 +13,10 @@ router.get("/signup", (req, res) => {
     res.render("sign-up")
 })
 
+router.post("/login", passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/"
+}))
 
 router.post("/signup",  async (req, res, next) => {
     try{ 
