@@ -7,7 +7,7 @@ require('dotenv').config();
 const LocalStrategy = require('passport-local').Strategy;
 const app = express();
 const {prisma} = require("./lib/prisma.js")
-
+const router = require('./routes/router.js');
 
 passport.use(new LocalStrategy({usernameField: 'email'}, async function verify(email, password, done) {
     try { 
@@ -67,11 +67,22 @@ app.use(session({
     )
 }))
 
-app.get("/", (req, res) => {
-    res.send("elo elo")
-})
+
+
+
+
 app.use(passport.initialize())
+app.use(passport.session && passport.session())
+
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    next();
+})
+
+app.use('/', router)
+
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${process.env.PORT || 3000}`);
 });
