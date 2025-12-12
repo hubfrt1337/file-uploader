@@ -12,6 +12,10 @@
             <input type="file" name="document" id="document">
             <button type="submit">Upload</button>
         </form>
+        <form action="/create-folder/:id" method="post">
+            <input type="text" id="name" name="name">
+            <button type="submit">Create</button>
+        </form>
   <%  } else { %>
     <form action="/login" method="post">
         <input type="email" name="email" placeholder="Email" required>
