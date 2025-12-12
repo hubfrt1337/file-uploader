@@ -8,6 +8,10 @@
 <body>
     <% if(user) { %>
         <h1>Welcome <%=user.email%></h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="document" id="document">
+            <button type="submit">Upload</button>
+        </form>
   <%  } else { %>
     <form action="/login" method="post">
         <input type="email" name="email" placeholder="Email" required>
