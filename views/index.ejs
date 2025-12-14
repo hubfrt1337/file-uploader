@@ -1,58 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/output.css">
     <!-- Roboto font-->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body class=" font-roboto p-10">
     <nav class="flex justify-between  items-center">
-            <div class="rounded-1g hover:bg-gray-100 transition">
-                <img class="w-10 h-10" src="/images/search.png">
-            </div>
-            <div class="text-3xl font-roboto">File Storage</div>
-            <div class="right-nav">
-                <% if(user) { %>
-                    <img class="w-10 h-10" src="/images/logout.png" alt="">
-               <% } else { %>
-                    <img class="w-10 h-10"  src="/images/login.png" alt="">
-                <%} %>
-            </div>
-        </nav>
-        <section class="flex mt-12 mb-8 justify-center rounded-xl items-center bg-gray-100">
-            <button class="p-5 flex-1 rounded-xl bg-accent" >Storage</button>
-            <button class="p-5 flex-1 rounded-xl ">Files</button>
-        </section>
+        <div class="rounded-1g hover:bg-gray-100 transition">
+            <img class="w-10 h-10" src="/images/search.png">
+        </div>
+        <div class="text-3xl font-roboto">File Storage</div>
+        <div class="right-nav">
+            <% if(user) { %>
+                <img class="w-10 h-10" src="/images/logout.png" alt="">
+                <% } else { %>
+                    <img class="w-10 h-10" src="/images/login.png" alt="">
+                    <%} %>
+        </div>
+    </nav>
+    <section class="flex mt-12 mb-8 justify-center rounded-xl items-center bg-gray-100">
+        <button class="p-5 flex-1 rounded-xl bg-accent">Storage</button>
+        <button class="p-5 flex-1 rounded-xl ">Files</button>
+    </section>
     <main>
-        
-    <% if(user) { %>
-        <h1 class="">Welcome <%=user.email%></h1>
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <input type="file" name="document" id="document">
-            <button type="submit">Upload</button>
-        </form>
-        <form action="/create-folder" method="post">
-            <input type="hidden" name="userId" value="<%=user.id%>">
-            <input type="text" id="name" name="name">
-            <button type="submit">Create</button>
-        </form>
-        <form action="/folder/<%=user.id%>?_method=PATCH" method="post">
-            <input type="hidden" name="folderId" value="<%=user.id%>">
-            <input type="text" name="name">
-            <button type="submit">Update</button>
-        </form>
-  <%  } else { %>
-    <form action="/login" method="post">
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Log In</button>
-    </form>
-   <% } %>
-   </main>
+        <section class="flex p-10 bg-gray-100 justify-center rounded-2xl items-center flex-col">
+            <div class="text-xl">
+                <%= user.email %>
+            </div>
+            <div class="circular-progress mt-5 flex justify-center rounded-full items-center w-45 h-45 "
+                 data-percentage="38">
+                <div class="rounded-full bg-white absolute w-35 h-35 inner-circle"></div>
+                <div class="py-5 flex flex-col percentage relative">
+                    <div class="flex justify-center items-center">
+                        <div class="text-6xl text-secondary progress-number">38
+                        </div>
+                        <span class="text-secondary  text-2xl align-top">%</span>
+                    </div>
+                        <div>
+                            <div class="text-2xl text-center">used</div>
+                        </div>
+        </section>
+        <% if(user) { %>
+            <h1 class="">Welcome <%=user.email%>
+            </h1>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <input type="file" name="document" id="document">
+                <button type="submit">Upload</button>
+            </form>
+            <form action="/create-folder" method="post">
+                <input type="hidden" name="userId" value="<%=user.id%>">
+                <input type="text" id="name" name="name">
+                <button type="submit">Create</button>
+            </form>
+            <form action="/folder/<%=user.id%>?_method=PATCH" method="post">
+                <input type="hidden" name="folderId" value="<%=user.id%>">
+                <input type="text" name="name">
+                <button type="submit">Update</button>
+            </form>
+            <% } else { %>
+                <form action="/login" method="post">
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit">Log In</button>
+                </form>
+                <% } %>
+    </main>
+
+    <script src="/scripts/progress-circle.js"></script>
 </body>
+
 </html>

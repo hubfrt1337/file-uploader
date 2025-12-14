@@ -1,6 +1,5 @@
 /*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-@layer properties;
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
@@ -9,22 +8,29 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --color-amber-300: oklch(87.9% 0.169 91.605);
-    --color-blue-600: oklch(54.6% 0.245 262.881);
     --color-gray-100: oklch(96.7% 0.003 264.542);
+    --color-black: #000;
+    --color-white: #fff;
     --spacing: 0.25rem;
+    --text-xl: 1.25rem;
+    --text-xl--line-height: calc(1.75 / 1.25);
     --text-2xl: 1.5rem;
     --text-2xl--line-height: calc(2 / 1.5);
     --text-3xl: 1.875rem;
     --text-3xl--line-height: calc(2.25 / 1.875);
+    --text-4xl: 2.25rem;
+    --text-4xl--line-height: calc(2.5 / 2.25);
+    --text-6xl: 3.75rem;
+    --text-6xl--line-height: 1;
     --radius-sm: 0.25rem;
     --radius-lg: 0.5rem;
     --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
     --font-roboto: "Roboto", sans-serif;
-    --color-base: #F5F7FA;
     --color-secondary: #4A90E2;
     --color-accent: #2ECC71;
   }
@@ -178,8 +184,11 @@
   }
 }
 @layer utilities {
-  .mt-2 {
-    margin-top: calc(var(--spacing) * 2);
+  .absolute {
+    position: absolute;
+  }
+  .relative {
+    position: relative;
   }
   .mt-5 {
     margin-top: calc(var(--spacing) * 5);
@@ -187,20 +196,8 @@
   .mt-12 {
     margin-top: calc(var(--spacing) * 12);
   }
-  .mt-15 {
-    margin-top: calc(var(--spacing) * 15);
-  }
-  .mt-30 {
-    margin-top: calc(var(--spacing) * 30);
-  }
-  .mb-5 {
-    margin-bottom: calc(var(--spacing) * 5);
-  }
   .mb-8 {
     margin-bottom: calc(var(--spacing) * 8);
-  }
-  .mb-10 {
-    margin-bottom: calc(var(--spacing) * 10);
   }
   .flex {
     display: flex;
@@ -208,23 +205,29 @@
   .hidden {
     display: none;
   }
-  .table {
-    display: table;
-  }
   .h-10 {
     height: calc(var(--spacing) * 10);
+  }
+  .h-35 {
+    height: calc(var(--spacing) * 35);
+  }
+  .h-45 {
+    height: calc(var(--spacing) * 45);
   }
   .w-10 {
     width: calc(var(--spacing) * 10);
   }
+  .w-35 {
+    width: calc(var(--spacing) * 35);
+  }
+  .w-45 {
+    width: calc(var(--spacing) * 45);
+  }
   .flex-1 {
     flex: 1;
   }
-  .border-collapse {
-    border-collapse: collapse;
-  }
-  .resize {
-    resize: both;
+  .flex-col {
+    flex-direction: column;
   }
   .items-center {
     align-items: center;
@@ -235,31 +238,23 @@
   .justify-center {
     justify-content: center;
   }
-  .rounded-lg {
-    border-radius: var(--radius-lg);
+  .rounded-2xl {
+    border-radius: var(--radius-2xl);
+  }
+  .rounded-full {
+    border-radius: calc(infinity * 1px);
   }
   .rounded-xl {
     border-radius: var(--radius-xl);
   }
-  .rounded-b-sm {
-    border-bottom-right-radius: var(--radius-sm);
-    border-bottom-left-radius: var(--radius-sm);
-  }
-  .border {
-    border-style: var(--tw-border-style);
-    border-width: 1px;
-  }
-  .bg-\(--color-secondary\) {
-    background-color: var(--color-secondary);
-  }
   .bg-accent {
     background-color: var(--color-accent);
   }
-  .bg-amber-300 {
-    background-color: var(--color-amber-300);
-  }
   .bg-gray-100 {
     background-color: var(--color-gray-100);
+  }
+  .bg-white {
+    background-color: var(--color-white);
   }
   .p-5 {
     padding: calc(var(--spacing) * 5);
@@ -267,25 +262,36 @@
   .p-10 {
     padding: calc(var(--spacing) * 10);
   }
-  .pr-10 {
-    padding-right: calc(var(--spacing) * 10);
+  .py-5 {
+    padding-block: calc(var(--spacing) * 5);
   }
-  .pl-10 {
-    padding-left: calc(var(--spacing) * 10);
+  .text-center {
+    text-align: center;
+  }
+  .align-top {
+    vertical-align: top;
   }
   .font-roboto {
     font-family: var(--font-roboto);
+  }
+  .text-2xl {
+    font-size: var(--text-2xl);
+    line-height: var(--tw-leading, var(--text-2xl--line-height));
   }
   .text-3xl {
     font-size: var(--text-3xl);
     line-height: var(--tw-leading, var(--text-3xl--line-height));
   }
-  .underline {
-    text-decoration-line: underline;
+  .text-6xl {
+    font-size: var(--text-6xl);
+    line-height: var(--tw-leading, var(--text-6xl--line-height));
   }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
+  .text-xl {
+    font-size: var(--text-xl);
+    line-height: var(--tw-leading, var(--text-xl--line-height));
+  }
+  .text-secondary {
+    color: var(--color-secondary);
   }
   .transition {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
@@ -302,22 +308,4 @@
 }
 "editor.quickSuggestions": {
   "strings": "on";
-}
-@property --tw-border-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
-@layer properties {
-  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
-    *, ::before, ::after, ::backdrop {
-      --tw-border-style: solid;
-      --tw-outline-style: solid;
-    }
-  }
 }
