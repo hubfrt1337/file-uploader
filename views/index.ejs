@@ -4,17 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/output.css">
 </head>
-<body>
+<body class="bg-(--color-base)">
+    <nav class="flex justify-between p-10 items-center">
+            <div class="rounded-1g hover:bg-gray-100 transition">
+                <img class="w-10 h-10" src="/images/search.png">
+            </div>
+            <div class="text-3xl">File Storage</div>
+            <div class="right-nav">
+                <% if(user) { %>
+                    <img class="w-20 h-20" src="/images/logout.png" alt="">
+               <% } else { %>
+                    <img class="w-20 h-20"  src="/images/login.png" alt="">
+                <%} %>
+            </div>
+        </nav>
+    <main>
+        
     <% if(user) { %>
-        <h1>Welcome <%=user.email%></h1>
+        <h1 class="">Welcome <%=user.email%></h1>
         <form action="/upload" method="post" enctype="multipart/form-data">
             <input type="file" name="document" id="document">
             <button type="submit">Upload</button>
         </form>
-        <form action="/create-folder/:id" method="post">
+        <form action="/create-folder" method="post">
+            <input type="hidden" name="userId" value="<%=user.id%>">
             <input type="text" id="name" name="name">
             <button type="submit">Create</button>
+        </form>
+        <form action="/folder/<%=user.id%>?_method=PATCH" method="post">
+            <input type="hidden" name="folderId" value="<%=user.id%>">
+            <input type="text" name="name">
+            <button type="submit">Update</button>
         </form>
   <%  } else { %>
     <form action="/login" method="post">
@@ -23,5 +45,6 @@
         <button type="submit">Log In</button>
     </form>
    <% } %>
+   </main>
 </body>
 </html>

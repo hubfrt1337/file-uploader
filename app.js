@@ -8,6 +8,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const app = express();
 const {prisma} = require("./lib/prisma.js")
 const router = require('./routes/router.js');
+const methodOverride = require("method-override")
 
 passport.use(new LocalStrategy({usernameField: 'email'}, async function verify(email, password, done) {
     try { 
@@ -49,7 +50,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.static("public"))
 app.set('view engine', 'ejs');
-
+app.use(methodOverride("_method"))
 
 
 app.use(session({

@@ -45,6 +45,45 @@ router.post("/signup",  async (req, res, next) => {
     }
 });
 
+router.post('/create-folder', async (req, res, next) => {
+    try {
+        const {name, userId} = req.body;
+        await prisma.folder.create({
+            data: {
+                name: name,
+                userId: Number(userId)
+
+            }
+        })
+        
+    res.redirect(`/folder/${userId}`)
+    }   catch (err) {
+        next(err)
+    }
+})
+
+router.get("/folder/:folderId", async (req, res, next) => {
+    try {
+        const {folderId} = req.params;
+        res.send(folderId)
+
+        // to do, display files inside that folder
+    } catch (err){
+        next(err)
+    }
+})
+
+router.patch("/folder/:folderId", async (req, res, next) => {
+    try {
+        await prisma.folder.update({
+            where: {id: Number(req.params.id)},
+            data: req.body.name
+        })
+        res.redirect("/")
+    } catch (err){
+        next(err)
+    }
+})
 
 router.post("/upload", upload.single('document'), async (req, res, next) => {
     console.log('body:', req.body)
