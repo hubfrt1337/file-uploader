@@ -5,21 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/output.css">
+    <!-- Roboto font-->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
-<body class="bg-(--color-base)">
-    <nav class="flex justify-between p-10 items-center">
+<body class=" font-roboto p-10">
+    <nav class="flex justify-between  items-center">
             <div class="rounded-1g hover:bg-gray-100 transition">
                 <img class="w-10 h-10" src="/images/search.png">
             </div>
-            <div class="text-3xl">File Storage</div>
+            <div class="text-3xl font-roboto">File Storage</div>
             <div class="right-nav">
                 <% if(user) { %>
-                    <img class="w-20 h-20" src="/images/logout.png" alt="">
+                    <img class="w-10 h-10" src="/images/logout.png" alt="">
                <% } else { %>
-                    <img class="w-20 h-20"  src="/images/login.png" alt="">
+                    <img class="w-10 h-10"  src="/images/login.png" alt="">
                 <%} %>
             </div>
         </nav>
+        <section class="flex mt-12 mb-8 justify-center rounded-xl items-center bg-gray-100">
+            <button class="p-5 flex-1 rounded-xl bg-accent" >Storage</button>
+            <button class="p-5 flex-1 rounded-xl ">Files</button>
+        </section>
     <main>
         
     <% if(user) { %>

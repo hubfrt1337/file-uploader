@@ -1,4 +1,5 @@
 /*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @layer properties;
 @layer theme, base, components, utilities;
 @layer theme {
@@ -7,6 +8,7 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-amber-300: oklch(87.9% 0.169 91.605);
     --color-blue-600: oklch(54.6% 0.245 262.881);
     --color-gray-100: oklch(96.7% 0.003 264.542);
     --spacing: 0.25rem;
@@ -14,10 +16,17 @@
     --text-2xl--line-height: calc(2 / 1.5);
     --text-3xl: 1.875rem;
     --text-3xl--line-height: calc(2.25 / 1.875);
+    --radius-sm: 0.25rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
+    --font-roboto: "Roboto", sans-serif;
+    --color-base: #F5F7FA;
+    --color-secondary: #4A90E2;
+    --color-accent: #2ECC71;
   }
 }
 @layer base {
@@ -169,6 +178,30 @@
   }
 }
 @layer utilities {
+  .mt-2 {
+    margin-top: calc(var(--spacing) * 2);
+  }
+  .mt-5 {
+    margin-top: calc(var(--spacing) * 5);
+  }
+  .mt-12 {
+    margin-top: calc(var(--spacing) * 12);
+  }
+  .mt-15 {
+    margin-top: calc(var(--spacing) * 15);
+  }
+  .mt-30 {
+    margin-top: calc(var(--spacing) * 30);
+  }
+  .mb-5 {
+    margin-bottom: calc(var(--spacing) * 5);
+  }
+  .mb-8 {
+    margin-bottom: calc(var(--spacing) * 8);
+  }
+  .mb-10 {
+    margin-bottom: calc(var(--spacing) * 10);
+  }
   .flex {
     display: flex;
   }
@@ -178,29 +211,14 @@
   .table {
     display: table;
   }
-  .h-6 {
-    height: calc(var(--spacing) * 6);
-  }
   .h-10 {
     height: calc(var(--spacing) * 10);
-  }
-  .h-12 {
-    height: calc(var(--spacing) * 12);
-  }
-  .h-20 {
-    height: calc(var(--spacing) * 20);
-  }
-  .w-6 {
-    width: calc(var(--spacing) * 6);
   }
   .w-10 {
     width: calc(var(--spacing) * 10);
   }
-  .w-12 {
-    width: calc(var(--spacing) * 12);
-  }
-  .w-20 {
-    width: calc(var(--spacing) * 20);
+  .flex-1 {
+    flex: 1;
   }
   .border-collapse {
     border-collapse: collapse;
@@ -214,28 +232,49 @@
   .justify-between {
     justify-content: space-between;
   }
+  .justify-center {
+    justify-content: center;
+  }
+  .rounded-lg {
+    border-radius: var(--radius-lg);
+  }
+  .rounded-xl {
+    border-radius: var(--radius-xl);
+  }
+  .rounded-b-sm {
+    border-bottom-right-radius: var(--radius-sm);
+    border-bottom-left-radius: var(--radius-sm);
+  }
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
-  .bg-\(--color-accent\) {
+  .bg-\(--color-secondary\) {
+    background-color: var(--color-secondary);
+  }
+  .bg-accent {
     background-color: var(--color-accent);
   }
-  .bg-\(--color-base\) {
-    background-color: var(--color-base);
+  .bg-amber-300 {
+    background-color: var(--color-amber-300);
   }
-  .bg-\(--color-primary\) {
-    background-color: var(--color-primary);
+  .bg-gray-100 {
+    background-color: var(--color-gray-100);
   }
-  .bg-blue-600 {
-    background-color: var(--color-blue-600);
+  .p-5 {
+    padding: calc(var(--spacing) * 5);
   }
   .p-10 {
     padding: calc(var(--spacing) * 10);
   }
-  .text-2xl {
-    font-size: var(--text-2xl);
-    line-height: var(--tw-leading, var(--text-2xl--line-height));
+  .pr-10 {
+    padding-right: calc(var(--spacing) * 10);
+  }
+  .pl-10 {
+    padding-left: calc(var(--spacing) * 10);
+  }
+  .font-roboto {
+    font-family: var(--font-roboto);
   }
   .text-3xl {
     font-size: var(--text-3xl);
@@ -260,11 +299,6 @@
       }
     }
   }
-}
-:root {
-  --color-base: #F5F7FA;
-  --color-secondary: #4A90E2;
-  --color-accent: #2ECC71;
 }
 "editor.quickSuggestions": {
   "strings": "on";
