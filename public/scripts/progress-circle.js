@@ -22,7 +22,7 @@ Array.from(circularProgress).forEach((progressBar) => {
     innerCircle.style.backgroundColor = 'white';
 
     progressBar.style.background = `conic-gradient(${accColor} ${
-      startValue * 3.6}deg, rgba(0,0,0,0.3) 0deg)`;
+      startValue * 3.6}deg, rgba(0,0,0,0.15) 0deg)`;
 
     if (startValue === endValue) {
         console.log("finish")

@@ -28,8 +28,8 @@
         </div>
     </nav>
     <section class="flex mt-12 mb-8 justify-center rounded-xl items-center bg-gray-100">
-        <button class="p-5 flex-1 rounded-xl bg-accent">Storage</button>
-        <button class="p-5 flex-1 rounded-xl ">Files</button>
+        <button class="p-5 cursor-pointer flex-1 rounded-xl bg-accent">Storage</button>
+        <button class="p-5 cursor-pointer flex-1 rounded-xl ">Files</button>
     </section>
     <main>
         <section class="flex p-10 bg-gray-100 justify-center rounded-2xl items-center flex-col">
@@ -48,6 +48,24 @@
                         <div>
                             <div class="text-2xl text-center">used</div>
                         </div>
+                </div>
+            </div>
+            <div class="flex justify-around gap-20 items-center mt-5">
+                <div class="flex justify-center gap-3 items-center">
+                    <div class="w-5 h-5 bg-accent rounded-xs"></div>
+                    <div class="flex flex-col justify-center items-center gap-1">
+                        <div class="opacity-75">Created</div>
+                        <div class="text-xl">5 Files</div>
+                    </div>
+                </div>
+                <div class="flex justify-center gap-3 items-center">
+                    <div class="w-5 h-5 bg-black opacity-15 rounded-xs"></div>
+                    <div class="flex flex-col justify-center items-center gap-1">
+                        <div class="opacity-75">Free</div>
+                        <div class="text-xl">100 Files</div>
+                    </div>
+                </div>
+            </div>  
         </section>
         <% if(user) { %>
             <h1 class="">Welcome <%=user.email%>
