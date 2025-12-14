@@ -15,15 +15,15 @@
 
 <body class=" font-roboto p-10">
     <nav class="flex justify-between  items-center">
-        <div class="rounded-1g hover:bg-gray-100 transition">
+        <div class="rounded-3xl cursor-pointer hover:bg-gray-100 transition">
             <img class="w-10 h-10" src="/images/search.png">
         </div>
         <div class="text-3xl font-roboto">File Storage</div>
         <div class="right-nav">
             <% if(user) { %>
-                <img class="w-10 h-10" src="/images/logout.png" alt="">
+                <img class="w-10 h-10 cursor-pointer" src="/images/logout.png" alt="">
                 <% } else { %>
-                    <img class="w-10 h-10" src="/images/login.png" alt="">
+                    <img class="w-10 h-10 cursor-pointer" src="/images/login.png" alt="">
                     <%} %>
         </div>
     </nav>
@@ -54,18 +54,36 @@
                 <div class="flex justify-center gap-3 items-center">
                     <div class="w-5 h-5 bg-accent rounded-xs"></div>
                     <div class="flex flex-col justify-center items-center gap-1">
-                        <div class="opacity-75">Created</div>
-                        <div class="text-xl">5 Files</div>
+                        <div class="text-sm opacity-75">Created</div>
+                        <div class="text-lg text-center">5 Files</div>
                     </div>
                 </div>
                 <div class="flex justify-center gap-3 items-center">
                     <div class="w-5 h-5 bg-black opacity-15 rounded-xs"></div>
                     <div class="flex flex-col justify-center items-center gap-1">
-                        <div class="opacity-75">Free</div>
-                        <div class="text-xl">100 Files</div>
+                        <div class="opacity-75 text-sm">Free</div>
+                        <div class="text-lg text-center">100 Files</div>
                     </div>
                 </div>
             </div>  
+        </section>
+
+        <section class="grid p-10 bg-gray-100  rounded-2xl  mt-5 gap-5 grid-cols-[repeat(auto-fill,minmax(80px,1fr))] justify-start">
+            <div class="flex flex-col p-2 transition hover:scale-120 duration-200 cursor-pointer gap-0.5">
+                <img src="/images/open-folder.png" 
+                class="h-16 w-18 block" alt="folder">
+                <div class="text-4l text-center">Main</div>
+            </div>
+            <div class="flex flex-col p-2  cursor-pointer gap-0.5">
+                <img src="/images/open-folder.png" 
+                class="h-16 w-16 block" alt="folder">
+                <div class="text-4l">Main</div>
+            </div>
+            <div class="flex flex-col p-2  cursor-pointer gap-0.5">
+                <img src="/images/open-folder.png" 
+                class="h-16 w-16 block" alt="folder">
+                <div class="text-lg">Main</div>
+            </div>
         </section>
         <% if(user) { %>
             <h1 class="">Welcome <%=user.email%>
