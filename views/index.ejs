@@ -13,105 +13,126 @@
         rel="stylesheet">
 </head>
 
-<body class=" font-roboto p-10">
-    <nav class="flex justify-between  items-center">
-        <div class="rounded-3xl cursor-pointer hover:bg-gray-100 transition">
-            <img class="w-10 h-10" src="/images/search.png">
-        </div>
-        <div class="text-3xl font-roboto">File Storage</div>
-        <div class="right-nav">
-            <% if(user) { %>
-                <img class="w-10 h-10 cursor-pointer" src="/images/logout.png" alt="">
-                <% } else { %>
-                    <img class="w-10 h-10 cursor-pointer" src="/images/login.png" alt="">
-                    <%} %>
-        </div>
-    </nav>
-    <section class="flex mt-12 mb-8 justify-center rounded-xl items-center bg-gray-100">
-        <button class="p-5 cursor-pointer flex-1 rounded-xl bg-accent">Storage</button>
-        <button class="p-5 cursor-pointer flex-1 rounded-xl ">Files</button>
-    </section>
-    <main>
-        <section class="flex p-10 bg-gray-100 justify-center rounded-2xl items-center flex-col">
-            <div class="text-xl">
-                <%= user.email %>
+
+<body class=" font-roboto"></body>
+<% if(user) { %>
+    <div class="bg-base p-10 min-h-screen">
+        <nav class="flex justify-between  items-center">
+            <div class="rounded-3xl cursor-pointer hover:bg-gray-100 transition">
+                <img class="w-10 h-10" src="/images/search.png">
             </div>
-            <div class="circular-progress mt-5 flex justify-center rounded-full items-center w-45 h-45 "
-                 data-percentage="38">
-                <div class="rounded-full bg-white absolute w-35 h-35 inner-circle"></div>
-                <div class="py-5 flex flex-col percentage relative">
-                    <div class="flex justify-center items-center">
-                        <div class="text-6xl text-secondary progress-number">38
+            <div class="text-3xl font-roboto">File Storage</div>
+            <div class="right-nav">
+                <% if(user) { %>
+                    <a href="/logout">
+                        <img class="w-10 h-10 cursor-pointer" src="/images/logout.png" alt="">
+                    </a>
+                    <% } else { %>
+                        <img class="w-10 h-10 cursor-pointer" src="/images/login.png" alt="">
+                        <%} %>
+            </div>
+        </nav>
+        <section class="flex mt-12 mb-8 justify-center rounded-xl items-center bg-gray-100">
+            <button class="p-5 cursor-pointer flex-1 rounded-xl bg-accent">Storage</button>
+            <button class="p-5 cursor-pointer flex-1 rounded-xl ">Files</button>
+        </section>
+        <main>
+            <section class="flex p-10 bg-gray-100 justify-center rounded-2xl items-center flex-col">
+                <div class="text-xl">
+                    <%= user.email %>
+                </div>
+                <div class="circular-progress mt-5 flex justify-center rounded-full items-center w-45 h-45 "
+                    data-percentage="38">
+                    <div class="rounded-full bg-white absolute w-35 h-35 inner-circle"></div>
+                    <div class="py-5 flex flex-col percentage relative">
+                        <div class="flex justify-center items-center">
+                            <div class="text-6xl text-secondary progress-number">38
+                            </div>
+                            <span class="text-secondary  text-2xl align-top">%</span>
                         </div>
-                        <span class="text-secondary  text-2xl align-top">%</span>
-                    </div>
                         <div>
                             <div class="text-2xl text-center">used</div>
                         </div>
-                </div>
-            </div>
-            <div class="flex justify-around gap-20 items-center mt-5">
-                <div class="flex justify-center gap-3 items-center">
-                    <div class="w-5 h-5 bg-accent rounded-xs"></div>
-                    <div class="flex flex-col justify-center items-center gap-1">
-                        <div class="text-sm opacity-75">Created</div>
-                        <div class="text-lg text-center">5 Files</div>
                     </div>
                 </div>
-                <div class="flex justify-center gap-3 items-center">
-                    <div class="w-5 h-5 bg-black opacity-15 rounded-xs"></div>
-                    <div class="flex flex-col justify-center items-center gap-1">
-                        <div class="opacity-75 text-sm">Free</div>
-                        <div class="text-lg text-center">100 Files</div>
+                <div class="flex justify-around gap-20 items-center mt-5">
+                    <div class="flex justify-center gap-3 items-center">
+                        <div class="w-5 h-5 bg-accent rounded-xs"></div>
+                        <div class="flex flex-col justify-center items-center gap-1">
+                            <div class="text-sm opacity-75">Created</div>
+                            <div class="text-lg text-center">5 Files</div>
+                        </div>
+                    </div>
+                    <div class="flex justify-center gap-3 items-center">
+                        <div class="w-5 h-5 bg-black opacity-15 rounded-xs"></div>
+                        <div class="flex flex-col justify-center items-center gap-1">
+                            <div class="opacity-75 text-sm">Free</div>
+                            <div class="text-lg text-center">100 Files</div>
+                        </div>
                     </div>
                 </div>
-            </div>  
-        </section>
+            </section>
 
-        <section class="grid p-10 bg-gray-100  rounded-2xl  mt-5 gap-5 grid-cols-[repeat(auto-fill,minmax(80px,1fr))] justify-start">
-            <div class="flex flex-col p-2 transition hover:scale-120 duration-200 cursor-pointer gap-0.5">
-                <img src="/images/open-folder.png" 
-                class="h-16 w-18 block" alt="folder">
-                <div class="text-4l text-center">Main</div>
-            </div>
-            <div class="flex flex-col p-2  cursor-pointer gap-0.5">
-                <img src="/images/open-folder.png" 
-                class="h-16 w-16 block" alt="folder">
-                <div class="text-4l">Main</div>
-            </div>
-            <div class="flex flex-col p-2  cursor-pointer gap-0.5">
-                <img src="/images/open-folder.png" 
-                class="h-16 w-16 block" alt="folder">
-                <div class="text-lg">Main</div>
-            </div>
-        </section>
-        <% if(user) { %>
-            <h1 class="">Welcome <%=user.email%>
-            </h1>
-            <form action="/upload" method="post" enctype="multipart/form-data">
-                <input type="file" name="document" id="document">
-                <button type="submit">Upload</button>
-            </form>
-            <form action="/create-folder" method="post">
-                <input type="hidden" name="userId" value="<%=user.id%>">
-                <input type="text" id="name" name="name">
-                <button type="submit">Create</button>
-            </form>
-            <form action="/folder/<%=user.id%>?_method=PATCH" method="post">
-                <input type="hidden" name="folderId" value="<%=user.id%>">
-                <input type="text" name="name">
-                <button type="submit">Update</button>
-            </form>
-            <% } else { %>
-                <form action="/login" method="post">
+            <section
+                class="grid p-10 bg-gray-100  rounded-2xl  mt-5 gap-5 grid-cols-[repeat(auto-fill,minmax(80px,1fr))] justify-start">
+                <div class="flex flex-col p-2 transition hover:scale-120 duration-200 cursor-pointer gap-0.5">
+                    <img src="/images/open-folder.png" class="h-16 w-18 block" alt="folder">
+                    <div class="text-4l text-center">Main</div>
+                </div>
+                <div class="flex flex-col p-2  cursor-pointer gap-0.5">
+                    <img src="/images/open-folder.png" class="h-16 w-16 block" alt="folder">
+                    <div class="text-4l">Main</div>
+                </div>
+                <div class="flex flex-col p-2  cursor-pointer gap-0.5">
+                    <img src="/images/open-folder.png" class="h-16 w-16 block" alt="folder">
+                    <div class="text-lg">Main</div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- if user doesn't exists 
+        <form action="/login" method="post">
                     <input type="email" name="email" placeholder="Email" required>
                     <input type="password" name="password" placeholder="Password" required>
                     <button type="submit">Log In</button>
-                </form>
-                <% } %>
-    </main>
+                </form> 
+        
+        -->
 
-    <script src="/scripts/progress-circle.js"></script>
-</body>
+    <%} else { %>
+        <div class="min-h-screen bg-[url('/images/background-5.jpg')] bg-cover bg-center
+            flex justify-center items-center p-10 ">
+            <div class="bg-base p-10 py-15 shadow-2xl  rounded-4xl flex flex-col justify-center items-center">
+                <h1 class="text-secondary font-bold mb-5 text-center  text-3xl">Simplify your file storage</h1>
+                <div class="text-sm text-center opacity-55">Upload, manage and organize your files in one place</div>
+                <button
+                    class="bg-accent rounded-4xl mt-5 cursor-pointer w-full py-4 px-10 text-3xl font-bold text-shadow  text-base">Let's
+                    go</button>
+            </div>
+        </div>
+        <% } %>
+            <% if(user) { %>
+                <h1 class="">Welcome <%=user.email%>
+                </h1>
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <input type="file" name="document" id="document">
+                    <button type="submit">Upload</button>
+                </form>
+                <form action="/create-folder" method="post">
+                    <input type="hidden" name="userId" value="<%=user.id%>">
+                    <input type="text" id="name" name="name">
+                    <button type="submit">Create</button>
+                </form>
+                <form action="/folder/<%=user.id%>?_method=PATCH" method="post">
+                    <input type="hidden" name="folderId" value="<%=user.id%>">
+                    <input type="text" name="name">
+                    <button type="submit">Update</button>
+                </form>
+                <% } else { %>
+                    <% } %>
+
+                        <script src="/scripts/progress-circle.js"></script>
+                        </body>
 
 </html>

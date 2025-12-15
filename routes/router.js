@@ -24,7 +24,7 @@ router.get("/signup", (req, res) => {
 
 router.post("/login", passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/"
+    failureRedirect: "/signup"
 }))
 
 router.post("/signup",  async (req, res, next) => {
@@ -71,6 +71,13 @@ router.get("/folder/:folderId", async (req, res, next) => {
     } catch (err){
         next(err)
     }
+})
+
+router.get("/logout", async (req, res, next) => {
+    req.logout(function(err) {
+        if(err) { return next(err);}
+        res.redirect("/")
+    });
 })
 
 router.patch("/folder/:folderId", async (req, res, next) => {
