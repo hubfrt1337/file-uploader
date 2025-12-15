@@ -26,6 +26,8 @@
     --text-3xl--line-height: calc(2.25 / 1.875);
     --text-6xl: 3.75rem;
     --text-6xl--line-height: 1;
+    --text-7xl: 4.5rem;
+    --text-7xl--line-height: 1;
     --font-weight-bold: 700;
     --radius-xs: 0.125rem;
     --radius-lg: 0.5rem;
@@ -197,6 +199,9 @@
   }
   .relative {
     position: relative;
+  }
+  .m-auto {
+    margin: auto;
   }
   .mt-5 {
     margin-top: calc(var(--spacing) * 5);
@@ -436,6 +441,10 @@
   .text-6xl {
     font-size: var(--text-6xl);
     line-height: var(--tw-leading, var(--text-6xl--line-height));
+  }
+  .text-7xl {
+    font-size: var(--text-7xl);
+    line-height: var(--tw-leading, var(--text-7xl--line-height));
   }
   .text-lg {
     font-size: var(--text-lg);

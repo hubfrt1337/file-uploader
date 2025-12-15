@@ -25,7 +25,6 @@ Array.from(circularProgress).forEach((progressBar) => {
       startValue * 3.6}deg, rgba(0,0,0,0.15) 0deg)`;
 
     if (startValue === endValue) {
-        console.log("finish")
       clearInterval(progress);
     }
 

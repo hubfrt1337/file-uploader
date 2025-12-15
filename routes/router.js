@@ -15,7 +15,12 @@ fs.mkdirSync(uploadDir, {recursive: true});
 const upload = multer({ dest: uploadDir })
 
 router.get("/", async (req, res) => {
-    res.render("index", {user: req.user})
+   const folders = await prisma.folder.findMany({
+        where: {
+            userId: req.user.id
+        }
+    })
+    res.render("index", {user: req.user, folders: folders})
 })
 
 router.get("/sign-up", (req, res) => {
@@ -39,12 +44,18 @@ router.post("/sign-up",  async (req, res, next) => {
         await prisma.user.create({
             data: {
                 email: email,
-                hash_password: hashedPassword
+                hash_password: hashedPassword,
+                folders: {
+                    create: {
+                        name: "Main"
+                    }
+                }
             }
         })
         res.redirect("/log-in")
      }
     catch (err){
+        console.log(err)
         return next(err)
     }
 });
