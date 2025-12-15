@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const {prisma} = require("../lib/prisma.js");
+const { prisma } = require("../lib/prisma.js");
 const bcrypt = require("bcryptjs");
 const path = require('path')
 const fs = require('fs')
@@ -9,18 +9,22 @@ const multer = require("multer")
 
 
 const uploadDir = path.join(__dirname, '..', 'public', 'data', 'uploads')
-fs.mkdirSync(uploadDir, {recursive: true});
+fs.mkdirSync(uploadDir, { recursive: true });
 
 
 const upload = multer({ dest: uploadDir })
 
 router.get("/", async (req, res) => {
-   const folders = await prisma.folder.findMany({
-        where: {
-            userId: req.user.id
-        }
-    })
-    res.render("index", {user: req.user, folders: folders})
+    let folders = false;
+    if (req.user) {
+        folders = await prisma.folder.findMany({
+            where: {
+                userId: req.user.id
+            }
+        })
+    }
+
+    res.render("index", { user: req.user, folders: folders })
 })
 
 router.get("/sign-up", (req, res) => {
@@ -36,10 +40,10 @@ router.post("/log-in", passport.authenticate("local", {
     failureRedirect: "/log-in"
 }))
 
-router.post("/sign-up",  async (req, res, next) => {
-    try{ 
-        const {email, password} = req.body;
-        
+router.post("/sign-up", async (req, res, next) => {
+    try {
+        const { email, password } = req.body;
+
         const hashedPassword = await bcrypt.hash(password, 10)
         await prisma.user.create({
             data: {
@@ -53,8 +57,8 @@ router.post("/sign-up",  async (req, res, next) => {
             }
         })
         res.redirect("/log-in")
-     }
-    catch (err){
+    }
+    catch (err) {
         console.log(err)
         return next(err)
     }
@@ -62,7 +66,7 @@ router.post("/sign-up",  async (req, res, next) => {
 
 router.post('/create-folder', async (req, res, next) => {
     try {
-        const {name, userId} = req.body;
+        const { name, userId } = req.body;
         await prisma.folder.create({
             data: {
                 name: name,
@@ -70,27 +74,27 @@ router.post('/create-folder', async (req, res, next) => {
 
             }
         })
-        
-    res.redirect(`/folder/${userId}`)
-    }   catch (err) {
+
+        res.redirect(`/folder/${userId}`)
+    } catch (err) {
         next(err)
     }
 })
 
 router.get("/folder/:folderId", async (req, res, next) => {
     try {
-        const {folderId} = req.params;
+        const { folderId } = req.params;
         res.send(folderId)
 
         // to do, display files inside that folder
-    } catch (err){
+    } catch (err) {
         next(err)
     }
 })
 
 router.get("/logout", async (req, res, next) => {
-    req.logout(function(err) {
-        if(err) { return next(err);}
+    req.logout(function (err) {
+        if (err) { return next(err); }
         res.redirect("/")
     });
 })
@@ -98,11 +102,11 @@ router.get("/logout", async (req, res, next) => {
 router.patch("/folder/:folderId", async (req, res, next) => {
     try {
         await prisma.folder.update({
-            where: {id: Number(req.params.id)},
+            where: { id: Number(req.params.id) },
             data: req.body.name
         })
         res.redirect("/")
-    } catch (err){
+    } catch (err) {
         next(err)
     }
 })
