@@ -31,7 +31,7 @@ router.post("/log-in", passport.authenticate("local", {
     failureRedirect: "/log-in"
 }))
 
-router.post("/signup",  async (req, res, next) => {
+router.post("/sign-up",  async (req, res, next) => {
     try{ 
         const {email, password} = req.body;
         
@@ -42,7 +42,7 @@ router.post("/signup",  async (req, res, next) => {
                 hash_password: hashedPassword
             }
         })
-        res.redirect("/")
+        res.redirect("/log-in")
      }
     catch (err){
         return next(err)
