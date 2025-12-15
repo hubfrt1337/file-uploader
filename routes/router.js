@@ -18,13 +18,17 @@ router.get("/", async (req, res) => {
     res.render("index", {user: req.user})
 })
 
-router.get("/signup", (req, res) => {
+router.get("/sign-up", (req, res) => {
     res.render("sign-up")
 })
 
-router.post("/login", passport.authenticate("local", {
+router.get("/log-in", (req, res, next) => {
+    res.render("log-in")
+})
+
+router.post("/log-in", passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/signup"
+    failureRedirect: "/log-in"
 }))
 
 router.post("/signup",  async (req, res, next) => {

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/output.css">
+</head>
+
+
+<body class="min-h-screen font-roboto bg-[url('/images/background-5.jpg')] bg-cover bg-center
+            flex justify-center items-center p-10 ">
+    <div class="bg-base p-10 py-15 shadow-2xl w-full rounded-4xl flex flex-col justify-center items-center">
+        <h1 class="text-secondary font-bold mb-5 text-center  text-3xl">Welcome back</h1>
+        <form action="/log-in" method="post">
+            <input class="block border-2 border-gray-500 rounded-lg p-2 mb-4" type="email" name="email"
+                placeholder="Email" required>
+            <input class="block border-2 border-gray-500 rounded-lg p-2" type="password" name="password"
+                placeholder="Password" required>
+            <div class="text-sm cursor-pointer opacity-55 hover:text-secondary transition duration-200 mt-5 mb-3 ">
+                <a href="/sign-up">Don't have an account? Sign up!</a>
+            </div>
+            <button
+                class="bg-accent rounded-4xl cursor-pointer w-full py-2 px-10 text-3xl font-bold text-shadow  text-base hover:text-secondary transition duration-200">Log
+                in!
+            </button>
+        </form>
+    </div>
+</body>
+
+</html>
