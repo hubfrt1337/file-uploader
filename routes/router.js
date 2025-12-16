@@ -81,10 +81,27 @@ router.post('/create-folder', async (req, res, next) => {
     }
 })
 
+
 router.get("/folder/:folderId", async (req, res, next) => {
     try {
         const { folderId } = req.params;
-        res.send(folderId)
+        console.log(folderId)
+
+        let folders = false;
+        if (req.user) {
+            folders = await prisma.folder.findMany({
+                where: {
+                    userId: req.user.id
+                }
+            })
+        }
+         const singleFolder = await prisma.folder.findUnique({
+            where: {
+                id: Number(folderId)
+            }
+         })
+         console.log(singleFolder)
+        res.render("folder", { user: req.user, folders: folders, singleFolder: singleFolder })
 
         // to do, display files inside that folder
     } catch (err) {

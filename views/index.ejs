@@ -12,18 +12,24 @@
 <body class=" font-roboto"></body>
 <% if(user) { %>
     <!-- hidden form to add folders-->
-    <div  id="modal" class="fixed inset-0 hidden items-center justify-center bg-black/50 z-2">
+    <div id="modal" class="fixed inset-0 hidden items-center justify-center bg-black/50 z-2">
         <div id="modalContent" class="bg-base p-6  rounded-xl w-66  ">
             <form class="rounded-xl w-46" action="/create-folder" method="post">
                 <input type="hidden" name="userId" value="<%=user.id%>">
-                <input class="p-2 block rounded-xl border-2 border-gray-200 bg-gray-100" type="text" id="name" name="name" placeholder="name" required>
-                <button id="closeModalBtn" class="mt-3 bg-accent py-2 px-5 hover:text-secondary transition duration-200 text-base rounded-xl cursor-pointer" type="submit">Create</button>
+                <input class="p-2 block rounded-xl border-2 border-gray-200 bg-gray-100" type="text" id="name"
+                    name="name" placeholder="name" required>
+                <button id="closeModalBtn"
+                    class="mt-3 bg-accent py-2 px-5 hover:text-secondary transition duration-200 text-base rounded-xl cursor-pointer"
+                    type="submit">Create</button>
             </form>
         </div>
     </div>
 
 
     <div class="p-10 min-h-screen">
+
+
+        <!-- Navigation -->
         <nav class="flex justify-between  items-center">
             <div class="rounded-3xl cursor-pointer hover:bg-gray-100 transition">
                 <img class="w-10 h-10" src="/images/search.png">
@@ -39,11 +45,17 @@
                         <%} %>
             </div>
         </nav>
+
+
+        <!-- Buttons Storage/Files section-->
         <section class="flex mt-12 mb-8 justify-center rounded-xl items-center bg-gray-100">
             <button class="p-5 cursor-pointer flex-1 rounded-xl bg-accent">Storage</button>
             <button class="p-5 cursor-pointer flex-1 rounded-xl ">Files</button>
         </section>
+
+
         <main>
+            <!-- Storage/Files section:   Circular progress or Files-->
             <section class="flex p-10 bg-gray-100 justify-center rounded-2xl items-center flex-col">
                 <div class="text-xl">
                     <%= user.email %>
@@ -80,30 +92,36 @@
                 </div>
             </section>
 
+            <!-- Folders section -->
             <section
                 class="grid p-10 bg-gray-100  rounded-2xl  mt-5 gap-5 grid-cols-[repeat(auto-fill,minmax(80px,1fr))] justify-center ">
                 <% if(folders){ %>
                     <% folders.forEach(folder=> { %>
-                        <div
-                            class="flex flex-col p-2 transition hover:scale-120 duration-200 cursor-pointer gap-0.5 m-auto">
-                            <img src="/images/open-folder.png" class="h-16 w-18 block" alt="folder">
-                            <div class="text-4l text-center">
-                                <%= folder.name %>
+                        <a href="/folder/<%=folder.id%>">
+                            <div
+                                class="flex flex-col p-2 transition hover:scale-120 duration-200 cursor-pointer gap-0.5 justify-center items-center">
+                                <img src="/images/open-folder.png" class="h-16 w-18 block" alt="folder">
+                                <div class="text-4l text-center">
+                                    <%= folder.name %>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                         <% }) %>
                             <% } %>
                                 <div id="openModalBtn" class="flex flex-col p-2  cursor-pointer gap-0.5">
                                     <div
                                         class="h-16 w-16 block m-auto  bg-accent text-6xl rounded-2xl text-base text-center transition duration-200 hover:text-secondary">
                                         +</div>
-                                    <div  class="text-lg text-center">Add</div>
+                                    <div class="text-lg text-center">Add</div>
                                 </div>
             </section>
         </main>
     </div>
 
-    <!-- if user doesn't exists 
+
+
+    <!---->
+    <!-- if user doesn't exists || Another page
         -->
 
     <%} else { %>
@@ -119,21 +137,6 @@
             </div>
         </div>
         <% } %>
-            <% if(user) { %>
-                <h1 class="">Welcome <%=user.email%>
-                </h1>
-                <form action="/upload" method="post" enctype="multipart/form-data">
-                    <input type="file" name="document" id="document">
-                    <button type="submit">Upload</button>
-                </form>
-
-                <form action="/folder/<%=user.id%>?_method=PATCH" method="post">
-                    <input type="hidden" name="folderId" value="<%=user.id%>">
-                    <input type="text" name="name">
-                    <button type="submit">Update</button>
-                </form>
-                <% } else { %>
-                    <% } %>
 
                         <script src="/scripts/progress-circle.js"></script>
                         <script src="/scripts/showModal.js"></script>

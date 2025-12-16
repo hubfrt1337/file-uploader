@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/output.css">
+</head>
+
+
+<body class="font-roboto"></body>
+<% if(user) { %>
+    <div class="p-10 min-h-screen">
+        <nav class="flex justify-between  items-center">
+            <div class="rounded-3xl cursor-pointer hover:bg-gray-100 transition">
+                <img class="w-10 h-10" src="/images/search.png">
+            </div>
+            <div class="text-3xl font-roboto">File Storage</div>
+            <div class="right-nav">
+                <a href="/logout">
+                    <img class="w-10 h-10 cursor-pointer" src="/images/logout.png" alt="">
+                </a>
+            </div>
+        </nav>
+
+        <main>
+            <section class="flex py-5 px-10 mt-10 bg-gray-100 justify-center rounded-2xl items-center flex-col">
+                <div class="text-xl">
+                    <% if(singleFolder) { %>
+                        <div class="flex justify-center gap-2">
+                            <div class="text-3xl text-secondary">
+                                <%=singleFolder.name %>
+                            </div>
+                            <div class="w-4 h-4 self-end cursor-pointer">
+                                <img class="w-4 h4 block" src="/images/edit.png" alt="edit">
+                            </div>
+                            
+                        </div>
+
+
+                        <% } else { %>
+                            Folder
+                            <% } %>
+                </div>
+                <div
+                    class="grid p-10 bg-gray-100  rounded-2xl  mt-5 gap-5 grid-cols-[repeat(auto-fill,minmax(80px,1fr))] justify-center">
+
+                </div>
+            </section>
+
+            <section
+                class="grid p-10 bg-gray-100  rounded-2xl  mt-5 gap-5 grid-cols-[repeat(auto-fill,minmax(80px,1fr))] justify-center ">
+                <% if(folders){ %>
+                    <% folders.forEach(folder=> { %>
+                        <div
+                            class="flex flex-col p-2 transition hover:scale-120 duration-200 cursor-pointer gap-0.5 m-auto">
+                            <img src="/images/open-folder.png" class="h-16 w-18 block" alt="folder">
+                            <div class="text-4l text-center">
+                                <%= folder.name %>
+                            </div>
+                        </div>
+                        <% }) %>
+                            <% } %>
+                                <div id="openModalBtn" class="flex flex-col p-2  cursor-pointer gap-0.5">
+                                    <div
+                                        class="h-16 w-16 block m-auto  bg-accent text-6xl rounded-2xl text-base text-center transition duration-200 hover:text-secondary">
+                                        +</div>
+                                    <div class="text-lg text-center">Add</div>
+                                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- if user doesn't exists 
+        -->
+
+    <%} else { %>
+        <div class="min-h-screen bg-[url('/images/background-5.jpg')] bg-cover bg-center
+            flex justify-center items-center p-10 ">
+            <div class="bg-base p-10 py-15 shadow-2xl  rounded-4xl flex flex-col justify-center items-center">
+                <h1 class="text-secondary font-bold mb-5 text-center  text-3xl">Simplify your file storage</h1>
+                <div class="text-sm text-center opacity-55">Upload, manage and organize your files in one place</div>
+                <button
+                    class="bg-accent rounded-3xl mt-5 cursor-pointer w-full py-4 px-10 text-3xl font-bold text-shadow  text-base"><a
+                        href="/log-in">Let's go</a>
+                </button>
+            </div>
+        </div>
+        <% } %>
+            <% if(user) { %>
+                <h1 class="">Welcome <%=user.email%>
+                </h1>
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <input type="file" name="document" id="document">
+                    <button type="submit">Upload</button>
+                </form>
+
+                <form action="/folder/<%=user.id%>?_method=PATCH" method="post">
+                    <input type="hidden" name="folderId" value="<%=user.id%>">
+                    <input type="text" name="name">
+                    <button type="submit">Update</button>
+                </form>
+                <% } else { %>
+                    <% } %>
+                        </body>
+
+</html>
