@@ -15,6 +15,7 @@
     <div id="modal" class="fixed inset-0 hidden items-center justify-center bg-black/50 z-2">
         <div id="modalContent" class="bg-base p-2  rounded-xl w-66  ">
             <form class="rounded-xl w-46" action="/folder/<%=singleFolder.id%>?_method=PATCH" method="post">
+
                     <input type="hidden" name="folderId" value="<%=user.id%>">
                     <input class="p-2 block rounded-xl border-2 border-gray-200 bg-gray-100" type="text" name="name" required placeholder="New folder name">
                     <button id="closeModalBtn" class="mt-3 bg-accent py-2 px-5 hover:text-secondary transition duration-200 text-base rounded-xl cursor-pointer" type="submit">Update name</button>
@@ -22,17 +23,17 @@
         </div>
     </div>
 
+    <!-- Hidden form DELETE folder-->
     <div id="modalBin" class="fixed inset-0 hidden items-center justify-center bg-black/50 z-2">
-        <div id="modalContentBin" class="bg-base p-8 flex justify-center gap-2 rounded-xl w-86  ">
-            <form action="/folder/<%=singleFolder.id%>?_method=DELETE" method="post">
-            <div  class="mr-4">This action will delete the folder and all files inside. Continue? </div>
-            <div class="flex justify-center gap-2 self-end">
-                <button id="submitBin" class="" type="submit">
-                    <img id="ok" class="block w-6 h-6 hover:scale-125 cursor-pointer transition duration-200" src="/images/check.png"  alt="Delete">
-                </button>
-                
-                <img id="x" class="block w-6 h-6 hover:scale-125 cursor-pointer transition duration-200" src="/images/remove.png" alt="">
-            </div>
+        <div id="modalContentBin" class="bg-base p-8  rounded-xl w-86  ">
+                 <form class="flex justify-center gap-2" action="/folder/<%=singleFolder.id%>?_method=DELETE" method="post">
+                    <div  class="mr-4">This action will delete the folder and all files inside. Continue?</div>
+                    <div class="flex justify-center gap-2 self-end">
+                    <button id="submitBin" class="" type="submit">
+                        <img id="ok" class="block w-6 h-6 hover:scale-125 cursor-pointer transition duration-200" src="/images/check.png"  alt="Delete">
+                    </button>
+                    <img id="x" class="block w-6 h-6 hover:scale-125 cursor-pointer transition duration-200" src="/images/remove.png" alt="">
+                </div>
             </form>
         </div>
     </div>
@@ -43,7 +44,7 @@
             <div class="rounded-3xl cursor-pointer hover:bg-gray-100 transition">
                 <img class="w-10 h-10" src="/images/search.png">
             </div>
-            <div class="text-3xl font-roboto">File Storage</div>
+            <div class="text-3xl font-roboto"><a href="/">File Storage</a></div>
             <div class="right-nav">
                 <a href="/logout">
                     <img class="w-10 h-10 cursor-pointer" src="/images/logout.png" alt="">
