@@ -117,12 +117,15 @@ router.get("/logout", async (req, res, next) => {
 })
 
 router.patch("/folder/:folderId", async (req, res, next) => {
+    
     try {
         await prisma.folder.update({
-            where: { id: Number(req.params.id) },
-            data: req.body.name
+            where: { id: Number(req.params.folderId) },
+            data: {
+                name: req.body.name
+            }
         })
-        res.redirect("/")
+        res.redirect(`/folder/${req.params.folderId}`)
     } catch (err) {
         next(err)
     }
