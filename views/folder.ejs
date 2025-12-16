@@ -13,14 +13,31 @@
 <% if(user) { %>
     <!-- hidden form to add folders-->
     <div id="modal" class="fixed inset-0 hidden items-center justify-center bg-black/50 z-2">
-        <div id="modalContent" class="bg-base p-6  rounded-xl w-66  ">
+        <div id="modalContent" class="bg-base p-2  rounded-xl w-66  ">
             <form class="rounded-xl w-46" action="/folder/<%=singleFolder.id%>?_method=PATCH" method="post">
                     <input type="hidden" name="folderId" value="<%=user.id%>">
-                    <input class="p-2 block rounded-xl border-2 border-gray-200 bg-gray-100" type="text" name="name" required>
+                    <input class="p-2 block rounded-xl border-2 border-gray-200 bg-gray-100" type="text" name="name" required placeholder="New folder name">
                     <button id="closeModalBtn" class="mt-3 bg-accent py-2 px-5 hover:text-secondary transition duration-200 text-base rounded-xl cursor-pointer" type="submit">Update name</button>
             </form>
         </div>
     </div>
+
+    <div id="modalBin" class="fixed inset-0 hidden items-center justify-center bg-black/50 z-2">
+        <div id="modalContentBin" class="bg-base p-8 flex justify-center gap-2 rounded-xl w-86  ">
+            <form action="/folder/<%=singleFolder.id%>?_method=DELETE" method="post">
+            <div  class="mr-4">This action will delete the folder and all files inside. Continue? </div>
+            <div class="flex justify-center gap-2 self-end">
+                <button id="submitBin" class="" type="submit">
+                    <img id="ok" class="block w-6 h-6 hover:scale-125 cursor-pointer transition duration-200" src="/images/check.png"  alt="Delete">
+                </button>
+                
+                <img id="x" class="block w-6 h-6 hover:scale-125 cursor-pointer transition duration-200" src="/images/remove.png" alt="">
+            </div>
+            </form>
+        </div>
+    </div>
+
+
     <div class="p-10 min-h-screen">
         <nav class="flex justify-between  items-center">
             <div class="rounded-3xl cursor-pointer hover:bg-gray-100 transition">
@@ -35,7 +52,7 @@
         </nav>
 
         <main>
-            <section class="flex py-5 px-10 mt-10 bg-gray-100 justify-center rounded-2xl items-center flex-col">
+            <section class="flex py-5 px-10 mt-10 bg-gray-100 justify-center rounded-2xl items-center flex-col relative">
                 <div class="text-xl">
                     <% if(singleFolder) { %>
                         <div class="flex justify-center gap-2">
@@ -45,17 +62,16 @@
                             <div class="w-4 h-4 self-end ">
                                 <img class="w-4 h4 block cursor-pointer" id="openModalBtn" src="/images/edit.png" alt="edit">
                             </div>
-                            
                         </div>
-
-
                         <% } else { %>
                             Folder
                             <% } %>
                 </div>
                 <div
                     class="grid p-10 bg-gray-100  rounded-2xl  mt-5 gap-5 grid-cols-[repeat(auto-fill,minmax(80px,1fr))] justify-center">
-
+                    <div id="openModalBtnBin" class="absolute bottom-4 right-4">
+                        <img  src="/images/bin.png" class="w-6 hover:scale-125 transition duration-200 h-6 cursor-pointer" alt="bin">
+                    </div>
                 </div>
             </section>
 
@@ -63,6 +79,7 @@
                 class="grid p-10 bg-gray-100  rounded-2xl  mt-5 gap-5 grid-cols-[repeat(auto-fill,minmax(80px,1fr))] justify-center ">
                 <% if(folders){ %>
                     <% folders.forEach(folder=> { %>
+                        <a href="/folder/<%=folder.id%>">
                         <div
                             class="flex flex-col p-2 transition hover:scale-120 duration-200 cursor-pointer gap-0.5 m-auto">
                             <img src="/images/open-folder.png" class="h-16 w-18 block" alt="folder">
@@ -70,14 +87,9 @@
                                 <%= folder.name %>
                             </div>
                         </div>
+                    </a>
                         <% }) %>
                             <% } %>
-                                <div id="openModalBtn" class="flex flex-col p-2  cursor-pointer gap-0.5">
-                                    <div
-                                        class="h-16 w-16 block m-auto  bg-accent text-6xl rounded-2xl text-base text-center transition duration-200 hover:text-secondary">
-                                        +</div>
-                                    <div class="text-lg text-center">Add</div>
-                                </div>
             </section>
         </main>
     </div>
@@ -109,7 +121,7 @@
                 
                 <% } else { %>
                     <% } %>
-                    <script src="/scripts/showModal.js"></script>
+                    <script src="/scripts/folderModals.js"></script>
                         </body>
 
 </html>

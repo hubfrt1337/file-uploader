@@ -84,8 +84,7 @@ router.post('/create-folder', async (req, res, next) => {
 
 router.get("/folder/:folderId", async (req, res, next) => {
     try {
-        const { folderId } = req.params;
-        console.log(folderId)
+        const {folderId} = req.params
 
         let folders = false;
         if (req.user) {
@@ -100,7 +99,7 @@ router.get("/folder/:folderId", async (req, res, next) => {
                 id: Number(folderId)
             }
          })
-         console.log(singleFolder)
+         
         res.render("folder", { user: req.user, folders: folders, singleFolder: singleFolder })
 
         // to do, display files inside that folder
@@ -127,6 +126,20 @@ router.patch("/folder/:folderId", async (req, res, next) => {
         })
         res.redirect(`/folder/${req.params.folderId}`)
     } catch (err) {
+        next(err)
+    }
+})
+router.delete("/folder/:folderId", async (req, res, next) => {
+    try {
+        const { folderId } = req.params;
+        await prisma.folder.delete({
+            where: {
+                id: Number(folderId)
+            }
+        })
+        res.redirect("/")
+    } catch (err) {
+        console.log(err)
         next(err)
     }
 })

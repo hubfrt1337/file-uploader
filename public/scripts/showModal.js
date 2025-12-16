@@ -22,3 +22,5 @@ const modal = document.getElementById("modal");
             modal.classList.add("hidden");
         }
     });
+
+   
