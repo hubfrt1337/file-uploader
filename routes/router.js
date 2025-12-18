@@ -38,6 +38,36 @@ router.get("/", async (req, res) => {
     res.render("index", { user: req.user, folders: folders, folderFiles: folderFile, num: num })
 })
 
+router.get("/api/search", async(req, res) => {
+    if(!req.user) return res.json([])
+
+        const q = req.query.q || "";
+        const results = await prisma.folder.findMany({
+            where: {
+                userId: req.user.id,
+                files: {
+                    some: {
+                        name: {
+                            contains: q,
+                            mode: 'insensitive'
+                        }
+                    }
+                }
+            },
+            include: {
+                files: {
+                    where: {
+                        name: {
+                            contains: q,
+                            mode: "insensitive"
+                        }
+                    }
+                }
+            }
+        })
+        res.json(results)
+})
+
 router.get("/sign-up", (req, res) => {
     res.render("sign-up")
 })
