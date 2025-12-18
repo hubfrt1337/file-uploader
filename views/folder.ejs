@@ -92,7 +92,7 @@
                             Folder
                             <% } %>
                 </div>
-                <div class="mt-4 grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-6">
+                <div class="mt-12 mb-12 grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-6">
                 <% if(files){ %>
                     <% files.forEach(file=> { %>
                             <div data-name="<%=file.name%>"
@@ -108,18 +108,18 @@
                         <% }) %>
                             <% } %>
                 </div>
-                <div class="border-4 rounded-2xl mt-5 mr-5 p-6 flex border-blue-400 border-dashed justify-center items-center flex-col dragover" id="drop-area">
+                <div class="border-4  max-w-3xl rounded-2xl mt-5 m-auto p-2 flex border-blue-400 border-dashed justify-center items-center flex-col dragover" id="drop-area">
                     <form class="flex flex-col justify-center items-center"  action="/upload/<%=singleFolder.id%>" method="post" enctype="multipart/form-data">
                         <input class="hidden" type="file" name="document" id="document" required>
                         
-                            <img id="img-upload" class="w-24 h-24  transition transform hover:opacity-85 duration-200 hover:scale-120" src="/images/upload.png" alt="upload image">
+                            <img id="img-upload" class="w-32 h-32  transition transform hover:opacity-85 duration-200 hover:scale-120" src="/images/upload.png" alt="upload image">
                             <div id="file-name" class="text-sm opacity-75"></div>
-                        <button class="bg-accent py-2 px-8 mt-8 text-base  rounded-2xl hover:text-secondary duration-200 transition cursor-pointer" type="submit">Upload</button>
+                        <button class="bg-accent py-2 px-8 mt-8 text-base  rounded-2xl hover:text-secondary duration-200 transition cursor-pointer -mb-8" type="submit">Upload</button>
                     </form>
                 </div>
 
 
-                <div id="openModalBtnBin" class="absolute bottom-4 right-4">
+                <div id="openModalBtnBin" class="absolute  top-4 right-2">
                     <img src="/images/bin.png" class="w-6 hover:scale-125 transition duration-200 h-6 cursor-pointer"
                         alt="bin">
                 </div>
