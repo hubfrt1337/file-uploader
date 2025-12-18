@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 const path = require('path')
 const fs = require('fs')
 const multer = require("multer")
-
+const {uploadToCloudinary} = require("../scriptCloud.js")
 
 
 
@@ -143,9 +143,17 @@ router.delete("/folder/:folderId", async (req, res, next) => {
     }
 })
 
-router.post("/upload", upload.single('document'), async (req, res, next) => {
-    console.log('body:', req.body)
-    console.log('file:', req.file.buffer)
+router.post("/upload/:folderId", upload.single('document'), async (req, res, next) => {
+   
+    const result = await uploadToCloudinary(req.file.buffer)
+    console.log(result, req.file)
+    await prisma.file.create({
+        data: {
+            folderId: req.params.folderId,
+            name: req.file.originalname,
+            url: result.secure_url
+        }
+    })
     res.redirect("/")
 })
 module.exports = router;
