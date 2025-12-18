@@ -76,18 +76,23 @@
                             Folder
                             <% } %>
                 </div>
-                <div
-                    class="grid p-10 bg-gray-100  rounded-2xl  mt-5 gap-5 grid-cols-[repeat(auto-fill,minmax(80px,1fr))] justify-start">
-                    <div id="openModalBtn" class="flex flex-col p-2  cursor-pointer gap-0.5">
-                        <div
-                            class="p-8 block m-auto  bg-accent rounded-2xl text-gray-200 text-center transition duration-200 hover:text-secondary text-6xl">
-                            A</div>
-                        <div class="text-lg text-center">File here</div>
-                    </div>
+                <div class="mt-4 grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-6">
+                <% if(files){ %>
+                    <% files.forEach(file=> { %>
+                            <div
+                                class="flex flex-col p-2 transition hover:scale-120 duration-200 cursor-pointer gap-0.5 justify-center items-center">
+                                <img src="/images/document.png" class="h-16 w-18 block" alt="folder">
+                                <div class="text-4l text-center">
+                                    <%= file.name %>
+                                </div>
+                            </div>
+                        </a>
+                        <% }) %>
+                            <% } %>
                 </div>
-                <div class="border-4 rounded-2xl mr-5 p-6 flex border-blue-400 border-dashed justify-center items-center flex-col dragover" id="drop-area">
-                    <form class="flex flex-col justify-center items-center"  action="/upload" method="post" enctype="multipart/form-data">
-                        <input class="hidden" type="file" name="document" id="document">
+                <div class="border-4 rounded-2xl mt-5 mr-5 p-6 flex border-blue-400 border-dashed justify-center items-center flex-col dragover" id="drop-area">
+                    <form class="flex flex-col justify-center items-center"  action="/upload/<%=singleFolder.id%>" method="post" enctype="multipart/form-data">
+                        <input class="hidden" type="file" name="document" id="document" required>
                         
                             <img id="img-upload" class="w-24 h-24  transition transform hover:opacity-85 duration-200 hover:scale-120" src="/images/upload.png" alt="upload image">
                             <div id="file-name" class="text-sm opacity-75"></div>
@@ -137,17 +142,7 @@
             </div>
         </div>
         <% } %>
-            <% if(user) { %>
-                <h1 class="">Welcome <%=user.email%>
-                </h1>
-                <form action="/upload" method="post" enctype="multipart/form-data">
-                    <input type="file" name="document" id="document">
-                    <button type="submit">Upload</button>
-                </form>
-
-
-                <% } else { %>
-                    <% } %>
+            
                         <script src="/scripts/folderModals.js"></script>
                         <script src="/scripts/dragOver.js"></script>
                         </body>
