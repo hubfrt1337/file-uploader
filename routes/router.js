@@ -89,7 +89,7 @@ router.get("/folder/:folderId", async (req, res, next) => {
         if (req.user) {
             folders = await prisma.folder.findMany({
                 where: {
-                    userId: req.user.id
+                    userId: Number(req.user.id)
                 }
             })
         }
@@ -99,7 +99,12 @@ router.get("/folder/:folderId", async (req, res, next) => {
             }
          })
          
-        res.render("folder", { user: req.user, folders: folders, singleFolder: singleFolder })
+         const files = await prisma.file.findMany({
+            where: {
+                folderId: Number(folderId)
+            }
+         })
+        res.render("folder", { user: req.user, folders: folders, singleFolder: singleFolder, files: files })
 
         // to do, display files inside that folder
     } catch (err) {
@@ -146,15 +151,14 @@ router.delete("/folder/:folderId", async (req, res, next) => {
 router.post("/upload/:folderId", upload.single('document'), async (req, res, next) => {
    
     const result = await uploadToCloudinary(req.file.buffer)
-    console.log(result, req.file)
     await prisma.file.create({
         data: {
-            folderId: req.params.folderId,
+            folderId: Number(req.params.folderId),
             name: req.file.originalname,
             url: result.secure_url
         }
     })
-    res.redirect("/")
+    res.redirect(`/folder/${req.params.folderId}`)
 })
 module.exports = router;
 
