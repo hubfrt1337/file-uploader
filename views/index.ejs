@@ -75,11 +75,11 @@
                     <%= user.email %>
                 </div>
                 <div class="circular-progress mt-5 flex justify-center rounded-full items-center w-45 h-45 "
-                    data-percentage="38">
+                    data-percentage="<%=num*4%>">
                     <div class="rounded-full bg-white absolute w-35 h-35 inner-circle"></div>
                     <div class="py-5 flex flex-col percentage relative">
                         <div class="flex justify-center items-center">
-                            <div class="text-6xl text-secondary progress-number">38
+                            <div class="text-6xl text-secondary progress-number">0
                             </div>
                             <span class="text-secondary  text-2xl align-top">%</span>
                         </div>
@@ -93,23 +93,22 @@
                         <div class="w-5 h-5 bg-accent rounded-xs"></div>
                         <div class="flex flex-col justify-center items-center gap-1">
                             <div class="text-sm opacity-75">Created</div>
-                            <div class="text-lg text-center">5 Files</div>
+                            <div class="text-lg text-center"><%=num%> <% if(num > 1) { %>
+                                Files <% } else { %> File <% } %> </div>
                         </div>
                     </div>
                     <div class="flex justify-center gap-3 items-center">
                         <div class="w-5 h-5 bg-black opacity-15 rounded-xs"></div>
                         <div class="flex flex-col justify-center items-center gap-1">
                             <div class="opacity-75 text-sm">Free</div>
-                            <div class="text-lg text-center">100 Files</div>
+                            <div class="text-lg text-center">25 Files</div>
                         </div>
                     </div>
                 </div>
             </section>
 
             <section id="filesSection" class="p-10 bg-gray-100 hidden  rounded-2xl  flex-col">
-                <div class="text-xl text-center">
-                    <%= user.email %>
-                </div>
+                
             <div class="grid mt-4 gap-6 grid-cols-[repeat(auto-fill,minmax(80px,1fr))] justify-start">
                 
                 <% if(folderFiles){ %>

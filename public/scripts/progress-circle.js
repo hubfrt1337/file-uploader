@@ -3,7 +3,7 @@ const circularProgress = document.querySelectorAll(".circular-progress");
 
 Array.from(circularProgress).forEach((progressBar) => {
 
-  const progressValue = progressBar.querySelector(".percentage");
+
   const innerCircle = progressBar.querySelector(".inner-circle");
   const progressNumber = progressBar.querySelector(".progress-number")
 
