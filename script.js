@@ -1,5 +1,6 @@
 import { prisma } from './lib/prisma.js';
 
+
 async function main() {
     const user = await prisma.user.create({
         data: {
@@ -25,3 +26,5 @@ main()
     await prisma.$disconnect()
     process.exit(1)
   })
+
+  

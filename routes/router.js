@@ -8,11 +8,10 @@ const fs = require('fs')
 const multer = require("multer")
 
 
-const uploadDir = path.join(__dirname, '..', 'public', 'data', 'uploads')
-fs.mkdirSync(uploadDir, { recursive: true });
 
 
-const upload = multer({ dest: uploadDir })
+
+const upload = multer({ storage: multer.memoryStorage() });
 
 router.get("/", async (req, res) => {
     let folders = false;
@@ -146,7 +145,7 @@ router.delete("/folder/:folderId", async (req, res, next) => {
 
 router.post("/upload", upload.single('document'), async (req, res, next) => {
     console.log('body:', req.body)
-    console.log('file:', req.file)
+    console.log('file:', req.file.buffer)
     res.redirect("/")
 })
 module.exports = router;
