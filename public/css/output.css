@@ -352,6 +352,9 @@
   .grid-cols-\[repeat\(auto-fill\,minmax\(80px\,1fr\)\)\] {
     grid-template-columns: repeat(auto-fill,minmax(80px,1fr));
   }
+  .grid-cols-\[repeat\(autofill\,minmax\(80px\,1fr\)\)\] {
+    grid-template-columns: repeat(autofill,minmax(80px,1fr));
+  }
   .flex-col {
     flex-direction: column;
   }

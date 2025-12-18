@@ -15,15 +15,23 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 router.get("/", async (req, res) => {
     let folders = false;
+    let folderFile = false;
     if (req.user) {
         folders = await prisma.folder.findMany({
             where: {
                 userId: req.user.id
             }
         })
+        folderFile = await prisma.folder.findMany({
+            where: {
+                userId: req.user.id,
+                
+            },
+            include: {files: true}
+        })
     }
-
-    res.render("index", { user: req.user, folders: folders })
+    console.log(folderFile)
+    res.render("index", { user: req.user, folders: folders, folderFiles: folderFile })
 })
 
 router.get("/sign-up", (req, res) => {

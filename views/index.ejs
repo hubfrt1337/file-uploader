@@ -49,14 +49,14 @@
 
         <!-- Buttons Storage/Files section-->
         <section class="flex mt-12 mb-8 justify-center rounded-xl items-center bg-gray-100">
-            <button class="p-5 cursor-pointer flex-1 rounded-xl bg-accent">Storage</button>
-            <button class="p-5 cursor-pointer flex-1 rounded-xl ">Files</button>
+            <button id="storageBtn" class="p-5 cursor-pointer flex-1 rounded-xl bg-accent">Storage</button>
+            <button id="filesBtn" class="p-5 cursor-pointer flex-1 rounded-xl ">Files</button>
         </section>
 
 
         <main>
             <!-- Storage/Files section:   Circular progress or Files-->
-            <section class="flex p-10 bg-gray-100 justify-center rounded-2xl items-center flex-col">
+            <section id="storageSection" class=" p-10 flex bg-gray-100 justify-center rounded-2xl items-center flex-col">
                 <div class="text-xl">
                     <%= user.email %>
                 </div>
@@ -90,6 +90,27 @@
                         </div>
                     </div>
                 </div>
+            </section>
+
+            <section id="filesSection" class="p-10 bg-gray-100 hidden  rounded-2xl  flex-col">
+                <div class="text-xl text-center">
+                    <%= user.email %>
+                </div>
+            <div class="grid mt-4 gap-6 grid-cols-[repeat(auto-fill,minmax(80px,1fr))] justify-start">
+                
+                <% if(folderFiles){ %>
+                    <% folderFiles.forEach(folder=> { %>
+                        <% folder.files.forEach(file => { %>
+                            <div
+                                class="flex flex-col p-2 transition hover:scale-120 duration-200 cursor-pointer gap-0.5 justify-center items-center">
+                                <img src="/images/document.png" class="h-16 w-18 block" alt="folder">
+                                <div class="text-4l text-center">
+                                    <%= file.name %>
+                                </div>
+                            </div>
+                       <% }) %>
+                        <% })} %>
+                        </div>
             </section>
 
             <!-- Folders section -->
@@ -140,6 +161,7 @@
 
                         <script src="/scripts/progress-circle.js"></script>
                         <script src="/scripts/showModal.js"></script>
+                        <script src="/scripts/storageFilesButton.js"></script>
                         </body>
 
 </html>
