@@ -45,6 +45,22 @@
         </div>
     </div>
 
+    <!--hidden SIDE PANEL -->
+    <div id="panel-container" class="fixed shadow-[ -4px_0_10px_rgba(0,0,0,0.2) ] right-0 top-0 bottom-0 p-10 w-80 h-full bg-base z-4 translate-x-full  transition duration-500 ">
+        <div id="close-panel" class=" text-right text-red-600">
+            <img src="/images/remove.png" class="w-8 h-8 cursor-pointer hover:scale-125 transition duration-200 float-right" alt="X">
+        </div>
+        <div id="name-panel" class="mt-25 text-4xl mb-5"></div>
+        <div id="url-panel" class="text-2xl hover:text-secondary transition duration-200">
+            <a id="a-panel" target="_blank" href="">Open file</a>
+        </div>
+        <div id="created-at" class="mt-5 opacity-35"></div>
+        <div class="py-4 px-8 text-center border-0 mt-6 bg-accent rounded-2xl text-base w-48 cursor-pointer text-2xl 
+        hover:text-secondary transition duration-200">
+            <a id="a-download" href="">Download</a>
+        </div>
+    </div>
+
     <!-- Navigation-->
     <div class="p-10 min-h-screen">
         <nav class="flex justify-between  items-center">
@@ -79,14 +95,16 @@
                 <div class="mt-4 grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-6">
                 <% if(files){ %>
                     <% files.forEach(file=> { %>
-                            <div
-                                class="flex flex-col p-2 transition hover:scale-120 duration-200 cursor-pointer gap-0.5 justify-center items-center">
+                            <div data-name="<%=file.name%>"
+                                data-url="<%=file.url%>"
+                                data-createdat="<%=file.created_at%>"
+                                class="flex files flex-col p-2 transition hover:scale-120 duration-200 cursor-pointer gap-0.5 justify-center items-center">
                                 <img src="/images/document.png" class="h-16 w-18 block" alt="folder">
                                 <div class="text-4l text-center">
                                     <%= file.name %>
                                 </div>
                             </div>
-                        </a>
+                        
                         <% }) %>
                             <% } %>
                 </div>
@@ -145,6 +163,7 @@
             
                         <script src="/scripts/folderModals.js"></script>
                         <script src="/scripts/dragOver.js"></script>
+                        <script src="/scripts/panel.js"></script>
                         </body>
 
 </html>

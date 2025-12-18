@@ -17,10 +17,13 @@ Array.from(files).forEach(file => {
         aDownload.href = url.replace("/upload/", `/upload/fl_attachment:${name.split(".")[0]}/`)
         aDownload.download = name;
     })
+    
+
 })
 
 close.addEventListener("click", () => {
     panelContainer.classList.add("translate-x-full")
 
 })
+
 
