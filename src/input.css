@@ -21,3 +21,13 @@
     background-color: #d5ebf5; 
     border: lightblue 4px solid
 }
+.li-styling{
+    padding: 4px 8px;
+    border-radius: 0.25rem;
+    transition: all linear 0.2s;
+    cursor: pointer;
+}
+.li-styling:hover{
+    background-color: rgb(206, 201, 201);
+
+}

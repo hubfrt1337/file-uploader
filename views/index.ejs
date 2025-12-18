@@ -44,11 +44,22 @@
     <div class="p-10 min-h-screen">
 
         <!-- Navigation -->
-        <nav class="flex justify-between  items-center">
+        <nav class="flex justify-between   items-center relative">
             <div class="rounded-3xl cursor-pointer hover:bg-gray-100 transition">
-                <img class="w-10 h-10" src="/images/search.png">
+                <img class="w-10 h-10" id="icon-search" src="/images/search.png">
+                
             </div>
-            <div class="text-3xl font-roboto"><a href="/">File Storage</a></div>
+            <div class="text-sm p-2 hidden  border-2 bg-white top-0 w-5/6 sm:w-auto rounded-2xl outline-0 absolute z-2 " id="search-container">
+                    <input class="outline-0 cursor-pointer block" type="text" id="search" name="search" placeholder="Search for a File">
+                </div>
+            <div class="absolute hidden overflow-y-scroll w-1/3 z-4 p-2 top-10 bg-white border-gray-200 border-2 h-32 " id="results-container">
+                <ul class="overflow-hidden" id="ul-container">
+                    <li class="p-2 hover:bg-gray-200">Nazwa 1</li>
+                    <li>nazwa 2</li>
+                    <li>djdqdjqwnq</li>
+                </ul>
+            </div>
+            <div class="text-3xl relative z-1 font-roboto"><a href="/">File Storage</a></div>
             <div class="right-nav">
                 <% if(user) { %>
                     <a href="/logout">
@@ -179,6 +190,7 @@
                         <script src="/scripts/showModal.js"></script>
                         <script src="/scripts/storageFilesButton.js"></script>
                         <script src="/scripts/panel.js"></script>
+                        <script src="/scripts/search.js"></script>
                         </body>
 
 </html>
