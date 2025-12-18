@@ -30,7 +30,6 @@ router.get("/", async (req, res) => {
             include: {files: true}
         })
     }
-    console.log(folderFile)
     res.render("index", { user: req.user, folders: folders, folderFiles: folderFile })
 })
 
