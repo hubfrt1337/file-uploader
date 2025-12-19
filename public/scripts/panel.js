@@ -37,7 +37,7 @@ close.addEventListener("click", () => {
 const searchIcon = document.getElementById("icon-search")
 const searchContainer = document.getElementById("search-container")
 const resultsContainer = document.getElementById("results-container")
-console.log(searchIcon, searchContainer, resultsContainer)
+
 
 
 
