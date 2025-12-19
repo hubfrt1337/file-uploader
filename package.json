@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tailwindcss -i ./src/input.css -o ./public/css/output.css --watch",
-  "build": "tailwindcss -i ./src/input.css -o ./public/css/output.css --minify"
+  "build": "tailwindcss -i ./src/input.css -o ./public/css/output.css --minify",
+  "postinstall": "prisma generate"
 
   },
   "keywords": [],
