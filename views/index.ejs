@@ -127,16 +127,16 @@
                             <div data-name="<%=file.name%>"
                                 data-url="<%=file.url%>"
                                 data-createdat="<%=file.created_at%>"
-                                class="flex files flex-col p-2 transition hover:scale-120 duration-200 cursor-pointer gap-0.5 justify-center items-center">
+                                class="grid files grid-rows-[70px_50px] p-2 transition hover:scale-120 duration-200 cursor-pointer gap-0.5 justify-center items-center">
                                 <img src="/images/document.png" class="h-16 w-18 block" alt="folder">
                                 <div class="text-4l text-center">
-                                    <% if(file.name.length > 15) {
-                                        const number = file.name.length - 15;
+                                    <% if(file.name.length > 10) {
+                                        const number = file.name.length - 10;
                                         const dot = file.name.lastIndexOf(".")
                                         const dotString = file.name.slice(dot, file.name.length)
                                         const stringName = file.name.slice(0, dot - number)
                                         const finalString = stringName.concat(dotString)
-                                        console.log(finalString, stringName, dotString, file.name.length - 15)
+                                        
                                      %> 
                                     <span><%=finalString%></span> 
                                        <% } else { %>
