@@ -26,6 +26,7 @@ Built as part of **The Odin Project** curriculum.
 - User registration and authentication 
 
 ## Live Preview
+https://file-uploader-psi-three.vercel.app/
 
 ![Main page ss](public/images/ss-main.png)
 ![Login page ss](public/images/ss-2.png)
