@@ -74,8 +74,10 @@ searchInput.addEventListener("input", async () => {
     ulContainer.innerHTML = '';
     
     if (data.length === 0) {
-        return // to do display all files
+        // if the string is empty, data returns all rows
+        return;
     }
+    
     data.forEach(folder =>
         folder.files.forEach(file => {
             const li = document.createElement("li");
@@ -99,7 +101,39 @@ searchInput.addEventListener("input", async () => {
         })
     )
 
-    const li = document.querySelectorAll(".li-styling");
-    Array.from(li)
+})
 
+searchIcon.addEventListener("click", async () => {
+    const q = ""
+    const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`)
+    const data = await res.json();
+   // ulContainer.innerHTML = '';
+    
+    if (data.length === 0) {
+        // if the string is empty, data returns all rows
+        return;
+    }
+    
+    data.forEach(folder =>
+        folder.files.forEach(file => {
+            const li = document.createElement("li");
+            li.addEventListener("click", () => {
+                panelContainer.classList.remove("translate-x-full")
+                nameFile.textContent = file.name;
+                a.href = file.url
+                const date = new Date(file.created_at)
+                time.textContent = date.toLocaleString();
+                aDownload.href = file.url.replace("/upload/", `/upload/fl_attachment:${file.name.split(".")[0]}/`)
+                aDownload.download = file.name;
+                searchContainer.classList.remove("block")
+                resultsContainer.classList.remove("block")
+                searchContainer.classList.add("hidden")
+                resultsContainer.classList.add("hidden")
+
+            })
+            li.textContent = file.name
+            li.classList.add("li-styling")
+            ulContainer.appendChild(li)
+        })
+    )
 })
