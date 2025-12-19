@@ -10,9 +10,21 @@ cloudinary.config({
 })
 
 
-function uploadToCloudinary(buffer) {
+function uploadToCloudinary(buffer, mimetype) {
     return new Promise((resolve, reject) => {
+        let resourceType;
+        if(mimetype.startsWith("video")){
+            resourceType = "video"
+        } else if(mimetype.startsWith("image")){
+            resourceType = "image"
+        } else {
+            resourceType = "raw"
+        }
         const stream = cloudinary.uploader.upload_stream(
+            {
+                resource_type: resourceType,
+            },
+
             (error, result) => {
                 if (result) { resolve(result) }
                 else { reject(error) }

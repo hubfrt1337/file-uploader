@@ -192,7 +192,8 @@ router.delete("/folder/:folderId", async (req, res, next) => {
 
 router.post("/upload/:folderId", upload.single('document'), async (req, res, next) => {
     try { 
-    const result = await uploadToCloudinary(req.file.buffer)
+        console.log(req.file.mimetype)
+    const result = await uploadToCloudinary(req.file.buffer, req.file.mimetype)
     await prisma.file.create({
         data: {
             folderId: Number(req.params.folderId),
