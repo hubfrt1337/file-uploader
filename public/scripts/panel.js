@@ -72,7 +72,7 @@ searchInput.addEventListener("input", async () => {
     const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`)
     const data = await res.json();
     ulContainer.innerHTML = '';
-
+    
     if (data.length === 0) {
         return // to do display all files
     }

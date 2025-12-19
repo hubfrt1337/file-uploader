@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 const path = require('path')
 const fs = require('fs')
 const multer = require("multer")
-const {uploadToCloudinary} = require("../scriptCloud.js")
+const { uploadToCloudinary } = require("../scriptCloud.js")
 
 
 
@@ -26,11 +26,11 @@ router.get("/", async (req, res) => {
         folderFile = await prisma.folder.findMany({
             where: {
                 userId: req.user.id,
-                
+
             },
-            include: {files: true}
+            include: { files: true }
         })
-        
+
         folderFile.forEach(folder => {
             num += folder.files.length
         })
@@ -38,34 +38,34 @@ router.get("/", async (req, res) => {
     res.render("index", { user: req.user, folders: folders, folderFiles: folderFile, num: num })
 })
 
-router.get("/api/search", async(req, res) => {
-    if(!req.user) return res.json([])
+router.get("/api/search", async (req, res) => {
+    if (!req.user) return res.json([])
 
-        const q = req.query.q || "";
-        const results = await prisma.folder.findMany({
-            where: {
-                userId: req.user.id,
-                files: {
-                    some: {
-                        name: {
-                            contains: q,
-                            mode: 'insensitive'
-                        }
-                    }
-                }
-            },
-            include: {
-                files: {
-                    where: {
-                        name: {
-                            contains: q,
-                            mode: "insensitive"
-                        }
+    const q = req.query.q || "";
+    const results = await prisma.folder.findMany({
+        where: {
+            userId: req.user.id,
+            files: {
+                some: {
+                    name: {
+                        contains: q,
+                        mode: 'insensitive'
                     }
                 }
             }
-        })
-        res.json(results)
+        },
+        include: {
+            files: {
+                where: {
+                    name: {
+                        contains: q,
+                        mode: "insensitive"
+                    }
+                }
+            }
+        }
+    })
+    res.json(results)
 })
 
 router.get("/sign-up", (req, res) => {
@@ -125,7 +125,7 @@ router.post('/create-folder', async (req, res, next) => {
 
 router.get("/folder/:folderId", async (req, res, next) => {
     try {
-        const {folderId} = req.params
+        const { folderId } = req.params
 
         let folders = false;
         if (req.user) {
@@ -135,17 +135,17 @@ router.get("/folder/:folderId", async (req, res, next) => {
                 }
             })
         }
-         const singleFolder = await prisma.folder.findUnique({
+        const singleFolder = await prisma.folder.findUnique({
             where: {
                 id: Number(folderId)
             }
-         })
-         
-         const files = await prisma.file.findMany({
+        })
+
+        const files = await prisma.file.findMany({
             where: {
                 folderId: Number(folderId)
             }
-         })
+        })
         res.render("folder", { user: req.user, folders: folders, singleFolder: singleFolder, files: files })
 
         // to do, display files inside that folder
@@ -162,7 +162,7 @@ router.get("/logout", async (req, res, next) => {
 })
 
 router.patch("/folder/:folderId", async (req, res, next) => {
-    
+
     try {
         await prisma.folder.update({
             where: { id: Number(req.params.folderId) },
@@ -191,7 +191,7 @@ router.delete("/folder/:folderId", async (req, res, next) => {
 })
 
 router.post("/upload/:folderId", upload.single('document'), async (req, res, next) => {
-   
+
     const result = await uploadToCloudinary(req.file.buffer)
     await prisma.file.create({
         data: {
@@ -204,3 +204,22 @@ router.post("/upload/:folderId", upload.single('document'), async (req, res, nex
 })
 module.exports = router;
 
+router.get("/easy-login", async (req, res, next) => {
+    try {
+        const demoUser = await prisma.user.findUnique({
+            where: {
+                email: "12346@wp.pl"
+            }
+        })
+        
+        req.login(demoUser, (err) => {
+            if (err) {
+                return res.status(500).send("login error")
+            }
+            res.redirect("/")
+        })
+    } catch (err) {
+        next(err)
+    }
+    
+})
