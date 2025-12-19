@@ -104,10 +104,11 @@ searchInput.addEventListener("input", async () => {
 })
 
 searchIcon.addEventListener("click", async () => {
+    
     const q = ""
     const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`)
     const data = await res.json();
-   // ulContainer.innerHTML = '';
+    ulContainer.innerHTML = '';
     
     if (data.length === 0) {
         // if the string is empty, data returns all rows

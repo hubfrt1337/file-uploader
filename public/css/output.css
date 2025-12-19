@@ -760,6 +760,26 @@
       width: auto;
     }
   }
+  .md\:w-46 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing) * 46);
+    }
+  }
+  .md\:w-102 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing) * 102);
+    }
+  }
+  .md\:max-w-min {
+    @media (width >= 48rem) {
+      max-width: min-content;
+    }
+  }
+  .md\:min-w-max {
+    @media (width >= 48rem) {
+      min-width: max-content;
+    }
+  }
 }
 "editor.quickSuggestions": {
   "strings": "on";
