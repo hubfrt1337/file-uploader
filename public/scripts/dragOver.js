@@ -10,10 +10,8 @@ uploadImg.addEventListener("click", () => {
 
 
 inputFile.addEventListener("change", () => {
-    console.log(".")
     if(inputFile.files.length > 0){
         fileName.textContent = inputFile.files[0].name
-        console.log(fileName)
     } else {
         fileName.textContent = '';
     }
@@ -31,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
             dropArea.addEventListener(eventName, preventDefaults, false);
         });
 
-        console.log(dropArea); // You can uncomment this for debugging if needed
+        
 
         ["dragenter", "dragover"].forEach(eventName => {
             dropArea.addEventListener(eventName, () => {

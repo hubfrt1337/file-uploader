@@ -191,7 +191,7 @@ router.delete("/folder/:folderId", async (req, res, next) => {
 })
 
 router.post("/upload/:folderId", upload.single('document'), async (req, res, next) => {
-
+    try { 
     const result = await uploadToCloudinary(req.file.buffer)
     await prisma.file.create({
         data: {
@@ -201,6 +201,9 @@ router.post("/upload/:folderId", upload.single('document'), async (req, res, nex
         }
     })
     res.redirect(`/folder/${req.params.folderId}`)
+    } catch (err) {
+        next(err)
+    }
 })
 module.exports = router;
 
@@ -221,5 +224,13 @@ router.get("/easy-login", async (req, res, next) => {
     } catch (err) {
         next(err)
     }
+    
+})
+
+router.use((err, req, res, next) => {
+    console.error(err)
+    res.status(err.status || 500).json({
+        message: err.status || "Internal server error"
+    })
     
 })
